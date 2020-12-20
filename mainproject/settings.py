@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config
 
@@ -41,6 +41,12 @@ INSTALLED_APPS = [
     'authentication',
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION-CLASSES':(
+        'authentication.backends.JWTAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -116,7 +122,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+JWT_SECRET_KEY='asdfsd'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
